@@ -1,4 +1,4 @@
-﻿Public Class Form1
+﻿Public Class MainMenu
     Private Sub MandelbrotSet_Click(sender As Object, e As EventArgs) Handles MandelbrotSet.Click
         Dim file = getFile.getFile()
         file.WriteLine("mandelbrotSet")
