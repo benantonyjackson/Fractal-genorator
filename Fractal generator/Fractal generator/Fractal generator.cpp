@@ -2,7 +2,7 @@
 //
 #include "stdafx.h"
 #include "BitmapHeader.h"
-#include "BitmapImage.h"
+#include "FractalGenerator.h"
 #include <fstream>
 #include <iostream>
 #include <thread>
@@ -17,7 +17,7 @@ int main()
 	//Initialises random
 	srand(time(NULL));
 
-	BitmapImage * image = NULL;
+	FractalGenerator * image = NULL;
 	//String which stores the fractal the user selected 
 	std::string cmd;
 
@@ -52,19 +52,19 @@ int main()
 
 	if (cmd == "mandelbrotSet")
 	{
-		image = new BitmapImage(9000, 6000);
+		image = new FractalGenerator(9000, 6000);
 
-		thread1 = new std::thread(&BitmapImage::mandelbrotSet, *image);
+		thread1 = new std::thread(&FractalGenerator::mandelbrotSet, *image);
 	}
 	else if (cmd == "juliaSet")
 	{
-		image = new BitmapImage(12000, 12000);
+		image = new FractalGenerator(12000, 12000);
 		double real, imaginary;
 		//Reads the complex number selected by the user from a file
 		fCmd >> real;
 		fCmd >> imaginary;
 
-		thread1 = new std::thread(&BitmapImage::juliaSet, *image, BitmapImage::complex{ real ,  imaginary });
+		thread1 = new std::thread(&FractalGenerator::juliaSet, *image, FractalGenerator::complex{ real ,  imaginary });
 	}
 	else if (cmd == "SierpinskiTriangle")
 	{
@@ -72,15 +72,15 @@ int main()
 		fCmd >> width;
 		fCmd >> height;
 
-		image = new BitmapImage(width, height);
+		image = new FractalGenerator(width, height);
 
 		std::cout << "Please wait...\n\n";
 
-		thread1 = new std::thread(&BitmapImage::SierpinskiTriangle, *image, width, height);
+		thread1 = new std::thread(&FractalGenerator::SierpinskiTriangle, *image, width, height);
 	}
 	else if (cmd == "chaosGame")
 	{
-		image = new BitmapImage(2000, 2000);
+		image = new FractalGenerator(2000, 2000);
 
 		std::vector<BitmapImage::point> points;
 
@@ -99,7 +99,7 @@ int main()
 
 		std::cout << "Please wait...\n\n";
 		
-		thread1 = new std::thread(&BitmapImage::chaosGame, *image, points);
+		thread1 = new std::thread(&FractalGenerator::chaosGame, *image, points);
 		image->chaosGame(points);
 	}
 
