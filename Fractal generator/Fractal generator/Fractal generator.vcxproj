@@ -154,7 +154,7 @@
   <ItemGroup>
     <ClCompile Include="BitmapHeader.cpp" />
     <ClCompile Include="BitmapImage.cpp" />
-    <ClCompile Include="Fractal generator.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="FractalGenerator.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
