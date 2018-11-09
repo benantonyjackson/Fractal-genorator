@@ -1,7 +1,6 @@
 // Fractal generator.cpp : Defines the entry point for the console application.
 //
 #include "stdafx.h"
-#include "BitmapHeader.h"
 #include "FractalGenerator.h"
 #include <fstream>
 #include <iostream>

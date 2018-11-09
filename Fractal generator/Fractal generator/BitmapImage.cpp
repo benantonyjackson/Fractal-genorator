@@ -7,21 +7,23 @@
 BitmapImage::BitmapImage(int width, int height)
 {
 	//Generate the file header
-	std::string header = bitmap::getInfoHeader(width, height, rowSize, size);
-	//Calculates the amount of padding that should be at the end of each row
-	this->padding = rowSize - (width * 3);
+	/*std::string header = bitmap::*/genInfoHeader(width, height);
 
 	this->width = width;
 	this->height = height;
 
-	//Creates a new array of characters on the heap for the file data
-	data = new char[size];
+	//Calculates the amount of padding that should be at the end of each row
+	padding = rowSize - (width * 3);
+
+	std::cout << padding << std::endl;
+
+	
 	
 	//Writes the file header to the file data array
-	for (int i = 0; i < header.size(); i++)
+	/*for (int i = 0; i < header.size(); i++)
 	{
 		data[i] = header[i];
-	}
+	}*/
 
 	
 }
@@ -100,9 +102,11 @@ void BitmapImage::drawLine(double x1, double y1, double x2, double y2)
 
 char * BitmapImage::getPixel(unsigned int x, unsigned int y)
 {
+	//std::cout << (int)(data + HEADER_SIZE + ((y*(int)rowSize) + (padding*(y - 1))) + (x * 3));
+
 	//Returns a pointer to the pixel at the given coordinates
 	//Uses pointer arithmetic to find the correct position in the array of characters used to store the bitmap data
-	return data + bitmap::HEADER_SIZE + ((y*(int)rowSize) + (padding*y)) + (x * 3);
+	return data + HEADER_SIZE + ((y*rowSize) /*+ (padding* y)*/) + (x * 3);
 }
 
 void BitmapImage::setImageColour(int r, int g, int b)
@@ -114,9 +118,18 @@ void BitmapImage::setImageColour(int r, int g, int b)
 		{
 			//Set the current pixels rgb values to the values provided
 			char * temp = getPixel(x, y);
-			temp[colour::b] = b;
-			temp[colour::g] = g;
-			temp[colour::r] = r;
+			try
+			{ 
+				
+				temp[colour::b] = b;
+				temp[colour::g] = g;
+				temp[colour::r] = r;
+			} 
+			catch (...)
+			{
+				std::cout << temp << std::endl;
+				system("pause");
+			}
 		}
 	}
 }
@@ -199,4 +212,65 @@ void BitmapImage::fromHSVtoRGB(double hsv[3], double rgb[3])
 	rgb[1] += m;
 	rgb[2] += m;
 
+}
+
+void BitmapImage::genInfoHeader(int width, int height)
+{
+
+	//Calculates the size of each row in bytes
+	rowSize = floor((24 * width + 31) / 32) * 4;
+	//Calculates the size of the pixel data in bytes
+	unsigned int pixelArraySize = rowSize * abs(height);
+
+	//Calculates the overall size of the file in bytes 
+	size = pixelArraySize + HEADER_SIZE;
+
+	//Creates a new array of characters on the heap for the file data
+	data = new char[size];
+
+	//Adds the letters BM at the start of the header which indicates the file is a bitmap
+	data[0] = BITMAPHEADER_1[0];
+	data[1] = BITMAPHEADER_1[1];
+
+	
+
+	//Adds the file size to the header
+	//Uses bit shift because a character is 1 byte but the file size takes up 4 bytes in the file header
+	data[2] = size;
+	data[3] = size >> 8;
+	data[4] = size >> 16;
+	data[5] = size >> 24;
+
+	//Byte number where the colour data starts
+	data[10] = OFFSET;
+
+	//Size of the windows bitmap info header in bytes
+	data[14] = WINDOWS_BITMAP_INFO_HEADER_SIZE;
+
+	//Size in pixels
+	data[18] = width;
+	data[19] = width >> 8;
+	data[20] = width >> 16;
+	data[21] = width >> 24;
+
+	data[22] = height;
+	data[23] = height >> 8;
+	data[24] = height >> 16;
+	data[25] = height >> 24;
+
+	//Number of colour planes
+	data[26] = COLOUR_PLANES;
+
+	//Bits per pixel
+	data[28] = BITS_PER_PIXEL;
+
+	//Pixel array size in bytes
+	data[34] = pixelArraySize;
+	data[35] = pixelArraySize >> 8;
+	data[36] = pixelArraySize >> 16;
+	data[37] = pixelArraySize >> 24;
+
+	//Pixels per meter (For printing) 
+	data[38] = PIXELS_PER_METER;
+	data[42] = PIXELS_PER_METER;
 }
