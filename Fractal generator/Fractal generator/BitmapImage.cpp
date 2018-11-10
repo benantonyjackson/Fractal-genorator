@@ -40,32 +40,33 @@ void BitmapImage::drawLine(double x1, double y1, double x2, double y2)
 		swap(y1, y2);
 	}
 
-	double gradient;
+	//Stores the gradient of the line
+	double gradient = 0;
+	//
+	double increment = 1;
 
-	//If the line is perfectly horizontal then the line has no gradient 
+	 //Prevent divide by 0 error
 	if (x1 == x2)
 	{
-		gradient = 0;
+		//If the line is perfectly horizontal then the line has no gradient
+		gradient = 1;
 	}
-	else
+	else if (y1 != y2)
 	{
 		//Calculates the gradient of the line
 		double o = y2 - y1;
 		double a = abs(x2 - x1);
-		//Divided by 4 because a point is drawn in intervals of 0.25 to avoid gaps in the line
-		gradient = (o / a) / 4;
-	}
+		gradient = (o / a);
 
-	double increment;
+		//Ensures pixels are no skippped at more extreme gradients
+		increment = 1 / (gradient + 1);
+		gradient /= gradient + 1;
+	}
 
 	//Determines whether the line is drawn left to right or right to left
 	if (x2 < x1)
 	{
-		increment = -0.25;
-	}
-	else
-	{
-		increment = 0.25;
+		increment = -increment;
 	}
 
 	//Stores the y value of the current pixel being drawn
@@ -86,6 +87,7 @@ void BitmapImage::drawLine(double x1, double y1, double x2, double y2)
 		//Indexes the pixels red intensity
 		temp[colour::r] = 0;
 	}
+	
 }
 
 char * BitmapImage::getPixel(unsigned int x, unsigned int y)
