@@ -206,11 +206,12 @@ void BitmapImage::genInfoHeader(int width, int height)
 	//Creates a new array of characters on the heap for the file data
 	data = new char[size];
 
+	//Sets the header to an array of blank bytes
+	memset(data, BLANK_BYTE, HEADER_SIZE);
+
 	//Adds the letters BM at the start of the header which indicates the file is a bitmap
 	data[0] = BITMAPHEADER_1[0];
 	data[1] = BITMAPHEADER_1[1];
-
-	
 
 	//Adds the file size to the header
 	//Uses bit shift because a character is 1 byte but the file size takes up 4 bytes in the file header

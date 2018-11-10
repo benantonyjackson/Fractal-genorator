@@ -46,7 +46,7 @@ Partial Class SierpinskiTriangle
         Me.nudHeight.Maximum = New Decimal(New Integer() {20000, 0, 0, 0})
         Me.nudHeight.Name = "nudHeight"
         Me.nudHeight.Size = New System.Drawing.Size(162, 20)
-        Me.nudHeight.TabIndex = 0
+        Me.nudHeight.TabIndex = 1
         '
         'Label1
         '
@@ -72,7 +72,7 @@ Partial Class SierpinskiTriangle
         Me.cxbSymmetrical.Location = New System.Drawing.Point(226, 27)
         Me.cxbSymmetrical.Name = "cxbSymmetrical"
         Me.cxbSymmetrical.Size = New System.Drawing.Size(82, 17)
-        Me.cxbSymmetrical.TabIndex = 2
+        Me.cxbSymmetrical.TabIndex = 3
         Me.cxbSymmetrical.Text = "Symmetrical"
         Me.cxbSymmetrical.UseVisualStyleBackColor = True
         '
@@ -81,12 +81,13 @@ Partial Class SierpinskiTriangle
         Me.btnConfirm.Location = New System.Drawing.Point(12, 112)
         Me.btnConfirm.Name = "btnConfirm"
         Me.btnConfirm.Size = New System.Drawing.Size(75, 23)
-        Me.btnConfirm.TabIndex = 3
+        Me.btnConfirm.TabIndex = 2
         Me.btnConfirm.Text = "Confirm"
         Me.btnConfirm.UseVisualStyleBackColor = True
         '
         'SierpinskiTriangle
         '
+        Me.AcceptButton = Me.btnConfirm
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(320, 147)

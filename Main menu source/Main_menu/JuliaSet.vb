@@ -7,15 +7,20 @@
         Application.Exit()
     End Sub
 
+    'Allows user to set a point on the complex plane with the mouse
     Private Sub pnlPickPoint_Clicked(sender As Object, e As MouseEventArgs) Handles pnlPickPoint.Click
 
+        'Gets the location the user clicked on the panel
         Dim temp As Point = e.Location
 
+        'Flips the Y cooridinate
         temp -= New Point(0, 250)
         temp.Y = temp.Y * -1
         temp += New Point(0, 250)
 
+        'Scales x to be between -2 and 1
         txtReal.Text = temp.X / 250 - 2
+        'Scales y to be between 1 and -1
         txtImaginary.Text = temp.Y / 250 - 1
     End Sub
 
@@ -28,8 +33,8 @@
         ElseIf txtImaginary.Text > 4 Or txtImaginary.Text < -4 Then
             MsgBox("Input must be between 4 and -4")
         Else
-
-            Dim file = getFile.getFile
+            'Writes command and complex number to the file
+            Dim file = getFile.getFile()
 
             file.WriteLine("juliaSet")
             file.WriteLine(txtReal.Text)
@@ -43,8 +48,9 @@
 
     End Sub
 
+    'Sets the preset the user selected to the current output
     Private Sub cmdPresets_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmdPresets.SelectedIndexChanged
-        'MsgBox(cmdPresets.Text)
+        'Parses text in the selected combo box item to fit the format expected
         Dim complex(2) As String
         Dim i As Integer = 1
         Dim i2 As Integer = 0

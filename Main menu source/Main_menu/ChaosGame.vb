@@ -36,7 +36,7 @@
             If itemSelected = True Then
                 removeDot(lsvPoints.SelectedIndices(0))
             End If
-            'Allows user to undo the previous points added 
+            'Allows user to undo the previous points added by pressing cntrl+z
         ElseIf e.KeyCode = Keys.ControlKey Then
             controlIsPressed = True
         ElseIf e.KeyCode = Keys.Z And controlIsPressed = True And pnlIndex > 0 Then
@@ -103,6 +103,7 @@
                 y = 1999
             End If
 
+            'Writes current point to the file
             file.WriteLine(x)
             file.WriteLine(y)
 

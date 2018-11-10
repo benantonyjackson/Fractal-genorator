@@ -1,6 +1,7 @@
 ﻿Public Class MainMenu
     Private Sub MandelbrotSet_Click(sender As Object, e As EventArgs) Handles MandelbrotSet.Click
         Dim file = getFile.getFile()
+        'No additional user input is needed so the command is written straight to the file
         file.WriteLine("mandelbrotSet")
 
         file.Close()
