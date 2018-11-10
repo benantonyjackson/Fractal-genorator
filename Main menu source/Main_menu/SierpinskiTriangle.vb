@@ -16,12 +16,15 @@
 
     Private Sub btnConfirm_Click(sender As Object, e As EventArgs) Handles btnConfirm.Click
         'Writes the user input to the file
+
         Dim file = getFile.getFile()
         file.WriteLine("SierpinskiTriangle")
         file.WriteLine(nudWidth.Value)
         file.WriteLine(nudHeight.Value)
         file.Close()
         Application.Exit()
+
+
     End Sub
 
     Private Sub nudWidth_ValueChanged(sender As Object, e As EventArgs) Handles nudWidth.ValueChanged

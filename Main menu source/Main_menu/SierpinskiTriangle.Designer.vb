@@ -36,17 +36,21 @@ Partial Class SierpinskiTriangle
         '
         Me.nudWidth.Location = New System.Drawing.Point(146, 50)
         Me.nudWidth.Maximum = New Decimal(New Integer() {20000, 0, 0, 0})
+        Me.nudWidth.Minimum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.nudWidth.Name = "nudWidth"
         Me.nudWidth.Size = New System.Drawing.Size(162, 20)
         Me.nudWidth.TabIndex = 0
+        Me.nudWidth.Value = New Decimal(New Integer() {100, 0, 0, 0})
         '
         'nudHeight
         '
         Me.nudHeight.Location = New System.Drawing.Point(146, 76)
         Me.nudHeight.Maximum = New Decimal(New Integer() {20000, 0, 0, 0})
+        Me.nudHeight.Minimum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.nudHeight.Name = "nudHeight"
         Me.nudHeight.Size = New System.Drawing.Size(162, 20)
         Me.nudHeight.TabIndex = 1
+        Me.nudHeight.Value = New Decimal(New Integer() {100, 0, 0, 0})
         '
         'Label1
         '
