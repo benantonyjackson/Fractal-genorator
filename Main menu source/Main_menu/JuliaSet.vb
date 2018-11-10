@@ -4,6 +4,7 @@
     End Sub
 
     Private Sub JuliaSet_Closed(sender As Object, e As FormClosedEventArgs) Handles MyBase.Closed
+        'Exits whole application when the form is closed
         Application.Exit()
     End Sub
 
@@ -41,7 +42,7 @@
             file.WriteLine(txtImaginary.Text)
             file.Close()
 
-
+            'Exits whole application when the form is closed
             Application.Exit()
 
         End If

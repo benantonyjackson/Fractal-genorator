@@ -10,7 +10,7 @@
     End Sub
 
     Private Sub SierpinskiTriangle_Closed(sender As Object, e As FormClosedEventArgs) Handles MyBase.Closed
-
+        'Exits whole application when the form is closed
         Application.Exit()
     End Sub
 
