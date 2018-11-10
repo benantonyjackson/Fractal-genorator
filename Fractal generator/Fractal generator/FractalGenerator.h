@@ -18,20 +18,21 @@ public:
 		double imaginary;
 	};
 
-
 	void SierpinskiTriangle(double width, double height);
 
 	void mandelbrotSet();
 
+	
 	void chaosGame(std::vector<point> & points);
-
-	int isInSet(complex z, complex c);
 
 	void juliaSet(complex c);
 
-	void genSierpinskiTriangle(double x1, double y1, double x2, double y2, double x3, double y3);
-
 	//Stores an estimate how close the image is to being generated as a percentage
 	int progress = 0;
-};
 
+protected:
+	//Recursive function used to generate the Sierpinski triangle
+	void genSierpinskiTriangle(double x1, double y1, double x2, double y2, double x3, double y3);
+	//Itterates Fc(z) = z*z+c 100 times
+	int isInSet(complex z, complex c);
+};

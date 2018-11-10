@@ -1,31 +1,19 @@
 #include "stdafx.h"
 #include "BitmapImage.h"
 #include <iostream>
-#include <math.h>
+
 
 //Constructor - called when an instance of BitmapImage is created 
 BitmapImage::BitmapImage(int width, int height)
 {
 	//Generate the file header
-	/*std::string header = bitmap::*/genInfoHeader(width, height);
+	genInfoHeader(width, height);
 
 	this->width = width;
 	this->height = height;
 
 	//Calculates the amount of padding that should be at the end of each row
 	padding = rowSize - (width * 3);
-
-	std::cout << padding << std::endl;
-
-	
-	
-	//Writes the file header to the file data array
-	/*for (int i = 0; i < header.size(); i++)
-	{
-		data[i] = header[i];
-	}*/
-
-	
 }
 //Destructor - called when an instance of BitmapImage is destroyed
 BitmapImage::~BitmapImage()
@@ -52,18 +40,18 @@ void BitmapImage::drawLine(double x1, double y1, double x2, double y2)
 		swap(y1, y2);
 	}
 
-	//Calculates the gradient of the line
-	double o = y2 - y1;
-	double a = abs(x2 - x1);
 	double gradient;
 
-	//If the line is horizontal with no gradient  
+	//If the line is perfectly horizontal then the line has no gradient 
 	if (x1 == x2)
 	{
 		gradient = 0;
 	}
 	else
 	{
+		//Calculates the gradient of the line
+		double o = y2 - y1;
+		double a = abs(x2 - x1);
 		//Divided by 4 because a point is drawn in intervals of 0.25 to avoid gaps in the line
 		gradient = (o / a) / 4;
 	}
@@ -102,8 +90,6 @@ void BitmapImage::drawLine(double x1, double y1, double x2, double y2)
 
 char * BitmapImage::getPixel(unsigned int x, unsigned int y)
 {
-	//std::cout << (int)(data + HEADER_SIZE + ((y*(int)rowSize) + (padding*(y - 1))) + (x * 3));
-
 	//Returns a pointer to the pixel at the given coordinates
 	//Uses pointer arithmetic to find the correct position in the array of characters used to store the bitmap data
 	return data + HEADER_SIZE + ((y*rowSize) /*+ (padding* y)*/) + (x * 3);
@@ -118,18 +104,10 @@ void BitmapImage::setImageColour(int r, int g, int b)
 		{
 			//Set the current pixels rgb values to the values provided
 			char * temp = getPixel(x, y);
-			try
-			{ 
 				
-				temp[colour::b] = b;
-				temp[colour::g] = g;
-				temp[colour::r] = r;
-			} 
-			catch (...)
-			{
-				std::cout << temp << std::endl;
-				system("pause");
-			}
+			temp[colour::b] = b;
+			temp[colour::g] = g;
+			temp[colour::r] = r;
 		}
 	}
 }

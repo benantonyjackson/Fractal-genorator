@@ -1,25 +1,28 @@
 #include "stdafx.h"
 #include "FractalGenerator.h"
 
-
+//Constructor - called when an instance of FractalGenerator is created 
 FractalGenerator::FractalGenerator(int width, int height)
 	: BitmapImage::BitmapImage(width, height)
 {
 	
 }
 
-
+//Destructor - called when an instance of FractalGenerator is destroyed
 FractalGenerator::~FractalGenerator()
 {
-	
+	//Destructor
 }
 
 
 void FractalGenerator::SierpinskiTriangle(double width, double height)
 {
+	//Sets background colour to white
 	setImageColour(255, 255, 255);
+
 	//Draws the first triangle, each point hits the edge of the screen
 	drawTriangle(0, 0, width / 2, height - 1, width - 1, 0);
+
 	//Starts drawing Sierpinski Triangle 
 	//Draws a triangle half the size of the current one with each point touching the midpoint of the current triangles lines
 	genSierpinskiTriangle(width*0.25, height / 2, width*0.75, height / 2, width / 2, 0);
@@ -64,9 +67,7 @@ void FractalGenerator::mandelbrotSet()
 		//Calculates the current percentage of completion
 		progress = (((float)x / 8999) * 100);
 		//\r removes the line after it is printed to show the percentage on only one line rather than across multiple lines
-		//-https://stackoverflow.com/questions/35258108/delete-the-last-line-outputted-into-console-from-a-cout
 		std::cout << progress << "% \r";
-		//End of code sourced from -https://stackoverflow.com/questions/35258108/delete-the-last-line-outputted-into-console-from-a-cout
 	}
 
 }
@@ -148,6 +149,7 @@ void FractalGenerator::juliaSet(complex c)
 		}
 
 		progress = (((float)x / 11999) * 100);
+		//\r removes the line after it is printed to show the percentage on only one line rather than across multiple lines
 		std::cout << progress << "% \r";
 	}
 }

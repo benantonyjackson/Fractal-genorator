@@ -46,10 +46,15 @@ public:
 	
 protected:
 	const double PI = 3.141592653589793238463;
-	//Stores the width and height of the image in pixels
-	int width, height;
+	//Stores the width of the image in pixels
+	int width;
+
+	//Stores the height of the image in pixels
+	int height;
+
 	//Stores the total size of the file in bytes
 	unsigned int size;
+
 	//Stores the total size of each row in bytes
 	unsigned int rowSize;
 	
@@ -76,8 +81,10 @@ protected:
 	//Stores the first two bytes of the bitmap,
 	//Used to establish the file as a bitmap
 	const char BITMAPHEADER_1[2] = { 'B', 'M' };
+
 	//Stores where the colour data starts in the file
 	const unsigned __int8 OFFSET = 54;
+
 	//Stores the size of the windows bitmap info header
 	const unsigned __int32 HEADER_SIZE = 54;
 
